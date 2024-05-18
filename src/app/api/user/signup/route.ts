@@ -8,7 +8,6 @@ connect();
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
-        console.log(body);
         const { username, email, password } = await body.user;
         let already = await User.findOne({ email });
         if (already){

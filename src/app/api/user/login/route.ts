@@ -25,11 +25,9 @@ export async function POST(req: NextRequest) {
                 username:user.username,
                 email:user.email
             }
-            const token = await jwt.sign(tokenData,process.env.TOKEN_SECRET!,{ expiresIn:"1d"});
+            const token =  jwt.sign(tokenData,process.env.TOKEN_SECRET!,{ expiresIn:"1d"});
             let res = NextResponse.json({ message: `welcome Sir,${user.username}`, success: true }, { status: 200 });
-            console.log(token+"<<<<<<<<000>>>>>>>>");
-           await res.cookies.set("token", token, {httpOnly:true});
-            console.log(res);
+            res.cookies.set("token", token, {httpOnly:true});
             return NextResponse.json({ message: `welcome Sir,${user.username}`, success: true }, { status: 200 });
 
         }
